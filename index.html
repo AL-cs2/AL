@@ -4,28 +4,63 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Socials</title>
+
   <style>
+    :root {
+      --bg: #f3f3f7;
+      --card-bg: #fff;
+      --text: #000;
+      --subtext: #555;
+      --link-bg: #f0f0f4;
+    }
+
+    body.dark {
+      --bg: #0d0d12;
+      --card-bg: #1a1a23;
+      --text: #ffffff;
+      --subtext: #bbbbbb;
+      --link-bg: #2a2a36;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f3f3f7;
+      background: var(--bg);
       display: flex;
       justify-content: center;
       padding: 40px 20px;
+      transition: background 0.3s ease, color 0.3s ease;
     }
+
     .card {
-      background: #fff;
+      background: var(--card-bg);
       width: 100%;
       max-width: 420px;
       border-radius: 22px;
       padding: 28px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      transition: background 0.3s ease;
+      color: var(--text);
     }
+
+    .theme-toggle {
+      cursor: pointer;
+      background: #6366f1;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 14px;
+      font-size: 0.9rem;
+      float: right;
+      margin-bottom: 15px;
+    }
+
     .profile {
       display: flex;
       align-items: center;
       gap: 18px;
     }
+
     .profile img {
       width: 70px;
       height: 70px;
@@ -33,56 +68,61 @@
       object-fit: cover;
       border: 3px solid #6366f1;
     }
+
     .name {
       font-size: 1.3rem;
       font-weight: bold;
     }
+
     .handle {
       color: #6366f1;
       font-size: 0.9rem;
     }
+
     .bio {
       font-size: 0.9rem;
       margin-top: 12px;
-      color: #555;
+      color: var(--subtext);
     }
+
     .links {
       margin-top: 26px;
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
+
     .link-item {
       text-decoration: none;
       padding: 14px 18px;
-      background: #f0f0f4;
+      background: var(--link-bg);
       border-radius: 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      color: #000;
-      transition: transform 0.15s ease;
+      color: var(--text);
+      transition: transform 0.15s ease, background 0.3s ease, color 0.3s ease;
     }
+
     .link-item:hover {
       transform: translateY(-3px);
     }
+
     .small-info {
       margin-top: 24px;
       display: flex;
       justify-content: space-between;
       font-size: 0.85rem;
-      color: #333;
-    }
-    footer {
-      margin-top: 25px;
-      text-align: center;
-      font-size: 0.75rem;
-      opacity: 0.7;
+      color: var(--subtext);
     }
   </style>
 </head>
+
 <body>
   <div class="card">
+
+    <button class="theme-toggle" id="themeBtn">Dark Mode</button>
+
     <div class="profile">
       <img src="LOGO.png" alt="avatar" />
       <div>
@@ -92,36 +132,58 @@
     </div>
 
     <div class="bio">
-     Hello i am al and i am a good cs player and i make videos on YouTube
+      Hello I am AL and I am a good CS player and I make videos on YouTube.
     </div>
 
     <div class="links">
-  <a class="link-item" href="https://www.tiktok.com/@al_cs_series" target="_blank">
-    TikTok <span>→</span>
-  </a>
+      <a class="link-item" href="https://www.tiktok.com/@al_cs_series" target="_blank">
+        TikTok <span>→</span>
+      </a>
 
-  <a class="link-item" href="https://www.youtube.com/@AL-CS-AL" target="_blank">
-    YouTube <span>→</span>
-  </a>
+      <a class="link-item" href="https://www.youtube.com/@AL-CS-AL" target="_blank">
+        YouTube <span>→</span>
+      </a>
 
-  <a class="link-item" href="https://x.com/AdrianL80341" target="_blank">
-    X <span>→</span>
-  </a>
-   <a class="link-item" href="https://www.twitch.tv/real_al_cs2" target="_blank">
-    Twitch <span>→</span>
-  </a>
-</div>
+      <a class="link-item" href="https://x.com/AdrianL80341" target="_blank">
+        X <span>→</span>
+      </a>
 
+      <a class="link-item" href="https://www.twitch.tv/real_al_cs2" target="_blank">
+        Twitch <span>→</span>
+      </a>
+    </div>
 
     <div class="small-info">
       <div>
-        <strong>Email Address</strong><br />adrianlindquist7@gmail.com
-      </div>
-      <div>
+        <strong>Email Address</strong><br />
+        adrianlindquist7@gmail.com
       </div>
     </div>
 
-    <footer></footer>
   </div>
+
+  <script>
+    const btn = document.getElementById("themeBtn");
+    const body = document.body;
+
+    // Load saved theme
+    if (localStorage.getItem("theme") === "dark") {
+      body.classList.add("dark");
+      btn.textContent = "Light Mode";
+    }
+
+    btn.addEventListener("click", () => {
+      body.classList.toggle("dark");
+
+      if (body.classList.contains("dark")) {
+        localStorage.setItem("theme", "dark");
+        btn.textContent = "Light Mode";
+      } else {
+        localStorage.setItem("theme", "light");
+        btn.textContent = "Dark Mode";
+      }
+    });
+  </script>
+
 </body>
 </html>
