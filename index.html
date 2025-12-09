@@ -7,20 +7,30 @@
 
   <style>
     :root {
-      --bg: #f3f3f7;
-      --card-bg: #fff;
-      --text: #000;
-      --subtext: #555;
-      --link-bg: #f0f0f4;
-    }
-
-    body.dark {
       --bg: #0d0d12;
       --card-bg: #1a1a23;
       --text: #ffffff;
       --subtext: #bbbbbb;
       --link-bg: #2a2a36;
     }
+    
+  .link-item {
+  text-decoration: none;
+  padding: 14px 18px;
+  background: #6366f1;        /* ← Purple button background */
+  border-radius: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #ffffff;             /* Make text white for better contrast */
+  transition: transform 0.15s ease, background 0.3s ease;
+}
+
+.link-item:hover {
+  transform: translateY(-3px);
+  background: #5758d6;        /* Slightly darker purple on hover */
+}
+
 
     body {
       margin: 0;
@@ -29,7 +39,7 @@
       display: flex;
       justify-content: center;
       padding: 40px 20px;
-      transition: background 0.3s ease, color 0.3s ease;
+      color: var(--text);
     }
 
     .card {
@@ -38,21 +48,7 @@
       max-width: 420px;
       border-radius: 22px;
       padding: 28px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-      transition: background 0.3s ease;
-      color: var(--text);
-    }
-
-    .theme-toggle {
-      cursor: pointer;
-      background: #6366f1;
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 14px;
-      font-size: 0.9rem;
-      float: right;
-      margin-bottom: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
     }
 
     .profile {
@@ -72,6 +68,7 @@
     .name {
       font-size: 1.3rem;
       font-weight: bold;
+      color: var(--text);
     }
 
     .handle {
@@ -101,7 +98,7 @@
       justify-content: space-between;
       align-items: center;
       color: var(--text);
-      transition: transform 0.15s ease, background 0.3s ease, color 0.3s ease;
+      transition: transform 0.15s ease;
     }
 
     .link-item:hover {
@@ -110,8 +107,6 @@
 
     .small-info {
       margin-top: 24px;
-      display: flex;
-      justify-content: space-between;
       font-size: 0.85rem;
       color: var(--subtext);
     }
@@ -120,8 +115,6 @@
 
 <body>
   <div class="card">
-
-    <button class="theme-toggle" id="themeBtn">Dark Mode</button>
 
     <div class="profile">
       <img src="LOGO.png" alt="avatar" />
@@ -154,36 +147,10 @@
     </div>
 
     <div class="small-info">
-      <div>
-        <strong>Email Address</strong><br />
-        adrianlindquist7@gmail.com
-      </div>
+      <strong>Email Address</strong><br />
+      adrianlindquist7@gmail.com
     </div>
 
   </div>
-
-  <script>
-    const btn = document.getElementById("themeBtn");
-    const body = document.body;
-
-    // Load saved theme
-    if (localStorage.getItem("theme") === "dark") {
-      body.classList.add("dark");
-      btn.textContent = "Light Mode";
-    }
-
-    btn.addEventListener("click", () => {
-      body.classList.toggle("dark");
-
-      if (body.classList.contains("dark")) {
-        localStorage.setItem("theme", "dark");
-        btn.textContent = "Light Mode";
-      } else {
-        localStorage.setItem("theme", "light");
-        btn.textContent = "Dark Mode";
-      }
-    });
-  </script>
-
 </body>
 </html>
